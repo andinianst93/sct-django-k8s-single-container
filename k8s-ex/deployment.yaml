@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sct-django-k8s-deployment
+  labels:
+    app: sct-django-k8s-deployment
+spec:
+  selector:
+    matchLabels:
+      app: sct-django-k8s-deployment
+  template:
+    metadata:
+      labels:
+        app: sct-django-k8s-deployment
+    spec:
+      containers:
+      - name: your-container-name
+        image: your-docker-username/your-image:tag
+        envFrom:
+          - secretRef:
+              name: your-env
+        ports:
+        - containerPort: 8000
+
