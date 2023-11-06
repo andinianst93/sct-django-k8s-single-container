@@ -1,5 +1,6 @@
 from django.test import TestCase
 from .models import CustomUser, Product
+import json
 
 class ProductTestCase(TestCase):
     def setUp(self):
@@ -32,11 +33,19 @@ class ProductTestCase(TestCase):
         # Check if the response status code is 200 (OK)
         self.assertEqual(response.status_code, 200)
 
-        # Check how many products are displayed in the response
-        products = response.context['products']
-        self.assertEqual(len(products), 2)  
-        # Check if the product names are in the response content
-        self.assertContains(response, 'Product 1')
-        self.assertContains(response, 'Product 2')
+        # Parse the JSON response content
+        content = json.loads(response.content)
+
+        # Check if the 'results' key exists in the JSON content
+        self.assertTrue('results' in content)
+
+        # Check the number of products in the API
+        products = content['results']
+        self.assertEqual(len(products), 2) 
+
+        # Check if the product names are in the JSON response
+        product_names = [product['name'] for product in products]
+        self.assertIn('Product 1', product_names)
+        self.assertIn('Product 2', product_names)
 
 
