@@ -39,3 +39,6 @@ Then, run the following command to ensure that you can connect to your Kubernete
 kubectl get nodes 
 ```
 If you see "ubuntu" listed as a node and its status is "ready," you are now ready to deploy your Django web application to Kubernetes.
+
+# HTTPS
+1. https://cert-manager.io/docs/installation/

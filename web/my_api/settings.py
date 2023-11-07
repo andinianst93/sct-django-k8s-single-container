@@ -50,6 +50,7 @@ AUTH_USER_MODEL = 'products.CustomUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -185,3 +186,27 @@ SIMPLE_JWT = {
         'sliding': 'sliding',
     },
 }
+
+CORS_ALLOWED_ORIGINS = [
+    '',
+]
+
+CORS_ALLOW_CREDENTIALS = True 
+
+CORS_ALLOW_METHODS = (
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+)
+
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
